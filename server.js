@@ -4390,3 +4390,23 @@ client.on('typingStart', (ch, user) => {
 })
 
 
+client.on('message', wolf => {   if (wolf.content === prefix + "invite") {     wolf.author.send('https://discord.com/api/oauth2/authorize?client_id=728396022056747118&permissions=8&scope=bot%27');
+  wolf.react(":white_check_mark:");
+ } });
+
+const online = [
+
+ 
+ "Extrim Bot On The Top",
+ "Hi Im Extrim Bot My perfix is $",
+ "What?",
+ "Who are you?",
+
+]
+
+client.on("message",message => {
+ if(message.content.startsWith("<@!728396022056747118>")) {
+      message.reply(online[Math.floor(Math.random() * online.length)])
+ }
+
+})
