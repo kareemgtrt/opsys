@@ -1796,12 +1796,7 @@ client.on("message", message => {
   }
 });
 
-client.on("message", message => {
-  if (message.content === "$invite") {
-    message.channel.send("**Please Check Your DM** :white_check_mark:");
-    message.channel.sendFile("");
-  }
-});
+
 
 client.on("message", message => {
   if (message.content === "who is lucky?") {
@@ -4366,14 +4361,7 @@ client.on("ready", () => {
   }, 10000); //لازم تخلي رتبه البوت اعلى من رتبه الون تبعه
 });
 
-client.on("message", wolf => {
-  if (wolf.content === prefix + "invite") {
-    wolf.author.send(
-      "https://discord.com/api/oauth2/authorize?client_id=728396022056747118&permissions=8&scope=bot"
-    );
-    wolf.react(":white_check_mark:");
-  }
-});
+
 
 const online = [
   "Extrim Bot On The Top",
@@ -4750,6 +4738,107 @@ client.on('message', message => {
     message.channel.send(RI);
   }
 });
+
+
+
+
+client.on("message", function(message) {
+  if (message.content.startsWith(prefix + "invite1321")) {
+    let messageArgs = message.content
+      .split(" ")
+      .slice(1)
+      .join(" ");
+    let messageRPS = message.content
+      .split(" ")
+      .slice(2)
+      .join(" ");
+    let arrayRPS = ["**# - Rock**", "**# - Paper**", "**# - Scissors**"];
+    let result = `${arrayRPS[Math.floor(Math.random() * arrayRPS.length)]}`;
+    var RpsEmbed = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+      .setThumbnail(message.author.avatarURL)
+    .setColor("RANDOM")
+     .addField("الرجاء اختيار نوع جهازك", "Computer | Phone", false)
+      .addField("Phone | تلفون", "📱", true)
+      .addField("Computer | كمبيوتر", "🖥️", true)
+    .setFooter("Extrim Bot")
+    message.channel.send(RpsEmbed).then(msg => {
+      msg.react("📱");
+      msg.react("🖥️")
+        .then(() => msg.react("📱"))
+        .then(() => msg.react("🖥️"))
+      let reaction1Filter = (reaction, user) =>
+        reaction.emoji.name === "📱" && user.id === message.author.id;
+      let reaction2Filter = (reaction, user) =>
+        reaction.emoji.name === "👑" && user.id === message.author.id;
+      let reaction3Filter = (reaction, user) =>
+        reaction.emoji.name === "🖥️" && user.id === message.author.id;
+      let reaction4Filter = (reaction, user) =>
+        reaction.emoji.name === "🖥️" && user.id === message.author.id;
+      let reaction1 = msg.createReactionCollector(reaction1Filter, {
+        time: 20000
+      });
+
+      let reaction2 = msg.createReactionCollector(reaction2Filter, {
+        time: 19000
+      });
+      let reaction3 = msg.createReactionCollector(reaction3Filter, {
+        time: 18000
+      });
+      let reaction4 = msg.createReactionCollector(reaction4Filter, {
+        time: 18000
+      });
+      reaction1.on("collect", r => {
+  const embed = new Discord.RichEmbed()
+.setColor("RANDOM")
+.setThumbnail(client.user.avatarURL)
+.setAuthor(message.author.username, message.author.avatarURL)
+.setTitle("Click Here To Invite The Bot | اضغط هنا لدعوة البوت")
+.setURL(
+  `https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`
+);
+        message.author.send(`https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`);
+        message.reply("تم ارسالك لينك دعوة بوت في خاص");
+      });
+      reaction2.on("collect", r => {
+        const embed = new Discord.RichEmbed()
+          .setThumbnail(
+            "https://cdn.discordapp.com/attachments/553862087382925313/556036868492230667/logo-admin-png-4.png"
+          )
+          (`
+      
+
+
+`);
+        message.author.sendEmbed(embed);
+        message.reply("تم ارسالك بلخاص");
+      });
+      reaction3.on("collect", r => {
+const embed = new Discord.RichEmbed()
+.setColor("RANDOM")
+.setThumbnail(client.user.avatarURL)
+.setAuthor(message.author.username, message.author.avatarURL)
+.setTitle("Click Here To Invite The Bot")
+.setURL(
+  `https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`
+);
+        message.author.sendEmbed(embed);
+        message.reply("تم ارسالك بلخاص");
+      });
+      reaction3.on("collect", r => {
+        const embed = new Discord.RichEmbed().setColor("#000000")
+          .setDescription(`
+『=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.』
+『=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.=.』
+`);
+      });
+    });
+  }
+});
+
+
+
+
 
 
 
