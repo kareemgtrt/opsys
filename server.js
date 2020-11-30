@@ -5471,6 +5471,145 @@ client.on('message', message =>{
 
 
 
+client.on("message", msg => {
+  let msgarray = msg.content.split(" ");
+  let cmd = msgarray[0];
+  let args = msgarray.slice(1);  
+if(cmd === `${prefix}dm`){
+  let mentions = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[0]));
+  if(!mentions) return msg.reply("**منشن العضو**").then(men => {
+      men.delete(2222)
+      msg.delete()
+  })
+  let args2 = args.join(" ").slice(22);
+  if(!args2) return msg.reply("**اكتب الرسالة**").then(am => {
+      am.delete(2222)
+      msg.delete()
+  })
+let emb = new Discord.RichEmbed()
+.setTitle("**DM**")
+.addField("**الرسالة**", args2)
+.addField("**الرسالة لـ**", mentions)
+.addField("**من قبل**", msg.author)
+.setDescription(`**هل انت متاْكد برسالتك؟
+✔ | نعم
+
+❌ | لا**`)
+msg.channel.send(emb).then(od => {
+  od.react("✔")
+  .then(()=> od.react("✔"))
+  .then(()=> od.react("❌"))
+  let reaction1Filter = (reaction, user) => reaction.emoji.name === '✔' && user.id === msg.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === msg.author.id;
+
+let reaction1 = od.createReactionCollector(reaction1Filter, { time: 12000 });
+let reaction2 = od.createReactionCollector(reaction2Filter, { time: 12000 });
+reaction2.on("collect", r => {
+msg.reply("**تم الغاء رسل رسالتك بنجاح**").then(cn => {
+cn.delete(2222)
+msg.delete()
+})
+od.delete(2222)
+})
+reaction1.on("collect", r => {
+let embd = new Discord.RichEmbed()
+.setTitle("**DM**")
+.setDescription(`** الرسالة نوع وش؟ :arrow_down:
+🚩 | امبد
+
+✨ | بدون امبد
+**`)
+msg.delete()
+od.delete(2222)
+msg.channel.send(embd).then(bo => {
+bo.react("🚩")
+.then(() => bo.react("🚩"))
+.then(() => bo.react("✨"))
+let r1 = (reaction, user) => reaction.emoji.name === '🚩' && user.id === msg.author.id;
+let r2 = (reaction, user) => reaction.emoji.name === '✨' && user.id === msg.author.id;
+
+let rec1 = bo.createReactionCollector(r1, { time: 12000 });
+let rec2 = bo.createReactionCollector(r2, { time: 12000 });
+rec1.on("collect", r => {
+let embde = new Discord.RichEmbed()
+.setTitle("**رسالة**")
+.addField("**الرسالة**", args2)
+.addField("**من قبل**", msg.author)
+bo.delete(2222)
+msg.reply("**تم ارسال الرسالة بنجاح ✔**").then(op => {
+  op.delete(2222)
+  msg.delete()
+})
+mentions.send(embde)
+})
+rec2.on("collect", r => {
+  mentions.send(args2)
+  msg.reply("**تم ارسال الرسالة بنجاح ✔**").then(ede => {
+      ede.delete(2222)
+      bo.delete(2222)
+      msg.delete()
+     
+  })
+  })
+
+})
+
+}) 
+})
+}
+})
+
+
+
+client.on("message", message => {
+  var args = message.content.split(" ");
+  var command = args[0];
+  if (command === prefix + "warn") {
+    // Warn2 و Warn1  اصنع رتبة ب اسم
+    var user = message.guild.member(message.mentions.users.first());
+    var warn1 = message.guild.roles.find("name", "Warn1");
+    var warn2 = message.guild.roles.find("name", "Warn2");
+    if (!message.channel.guild) {
+      message.channel.send("هذه الأوامر للسيرفرات فقط !!");
+      if (!message.member.hasPermission("ADMINISTRATOR"))
+        return message.reply("**  لا يوجد لديك صلاحية ADMINISTRATOR**");
+    } else if (!warn1) {
+      message.channel.send("لم يتم العثور على رتبة `Warn1`");
+    } else if (!warn2) {
+      message.channel.send("لم يتم العثور على رتبة `Warn2`");
+    } else if (!user) {
+      message.channel.send("لم تقم بوضع اسم الشخص");
+    } else if (!message.guild.member(user).roles.has(warn1.id)) {
+      message.channel.send("Done !");
+      user.addRole(warn1);
+      message.channel.send(message.member + " تم انذار");
+    } else if (!message.guild.member(user).roles.has(warn2.id)) {
+      message.channel.send("Done !");
+      user.addRole(warn2);
+      message.channel.send(message.member + " تم الإنذار رقم 2");
+    } else {
+      user.ban();
+      message.channel.send("تم حظر الشخص بسبب الإنذارات المتكررة");
+    }
+  } //${! .₳Ⱨ₥ɆĐ ♡}#0561
+});
+
+
+
+client.on("message", message => {
+  if (message.channel.type === "dm") {  
+
+      message.channel.startTyping();  
+      setTimeout(() => {  
+        message.channel.stopTyping();  
+      }, Math.random() * (1 - 3) + 1 * 1000);
+   
+  }  
+});
+
+
+
+
 const Constants = require('discord.js/src/util/Constants.js');
 Constants.DefaultOptions.ws.properties.$browser = 'Discord Android';
 
