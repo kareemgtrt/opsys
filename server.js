@@ -8,7 +8,7 @@ app.get("/", (request, response) => {
 });
 app.listen(process.env.PORT);
 setInterval(() => {
-  http.get(`http://opsys-7.glitch.me/`);
+  http.get(`http://rustcaln1.glitch.me/`);
 }, 280000);
 
 ////بكجات
@@ -5622,13 +5622,60 @@ client.on("message", message => {
 });
 
 
+client.on('message',message =>{ // MdAx77x CopyRght
+    if(!message.channel.guild) return;
+if(message.content =='$members') // Mdax77x | Toxic Codes CopyRight
+var E2Mdax = new Discord.RichEmbed()
+
+.setTitle('==========🌷| Members info==========')
+.addField('** Members count👥.:**',`__** [ ${message.guild.memberCount} ]**__`,true) // Mdax77x | Toxic Codes CopyRight
+.addField('📗|online',` ${message.guild.members.filter(m=>m.presence.status == 'online').size}`)
+.addField('📓| offline',`${message.guild.members.filter(m=>m.presence.status == 'offline').size}`) // Mdax77x | Toxic Codes CopyRight
+.setFooter(`Requested By | ${message.author.tag}`) // Mdax77x | Toxic Codes
+.addField('**==============**',true)
+.setColor('RANDOM')
+message.channel.send(E2Mdax); 
+});
 
 
-const Constants = require('discord.js/src/util/Constants.js');
-Constants.DefaultOptions.ws.properties.$browser = 'Discord Android';
+
+   
+client.on("message", async function (message) {
+    if (!prefix) {
+        var prefix = "$";
+    }
+    if (message.author.bot || !message.guild || !message.content.startsWith(prefix)) return;
+    var args = message.content.slice(prefix.length).split(" ");
+    var command = args[0];
+    if (command == "aboutserver") {
+        var { name, owner, id, memberCount, roles, channels, iconURL} = message.guild;
+        var invite = await message.channel.createInvite();
+        var embed = new Discord.RichEmbed()
+        .setDescription(`ServerName - ${name}\nserverOwner - <@${owner.user.id}>\nServerID - ${id}\nMember - ${memberCount}\nRoles - ${roles.size}\nChannels - ${channels.size}\nInviteLink - [Invite](${invite})`)
+        .setTimestamp();
+        if (iconURL) {
+            embed.setThumbnail(iconURL);
+        }
+        message.channel.send({
+            embed: embed
+        });
+    }
+});
 
 
 
-
+client.on("message", message => {
+if(message.content.startsWith(prefix + "setnick")){
+if(message.author.bot || message.channel.type == "dm" || !message.member.hasPermission("MANAGE_NICKNAMES") || !message.guild.member(client.user).hasPermission("MANAGE_NICKNAMES")) return;
+var user = message.mentions.members.first();
+var args = message.content.split(" ").slice(2);
+var nick = args.join(" ");
+if(!user || !args) return message.channel.send(`**• | Usage:** ${prefix}setnick \`\`@Name\`\` nickname`);
+if(message.guild.member(user.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`⛔ | I cant change **${user.user.username}**'s nickname because his role highest than my role!`);
+message.guild.member(user.user).setNickname(`${nick}`).then(() => {
+message.channel.send(`Successfully changed **${user.user.username}** nickname to **${nick}**`)
+}).catch(console.error); // Toxic Codes
+} // Julian
+}); // Codes
 
    
